@@ -196,32 +196,32 @@ class Tapper:
     async def user_info(self, session):
             url = f"https://api.tabibot.com/api/user/v1/profile"
         
-            async with session.get(url=url) as response:
+            async with session.get(url=url, ssl=False) as response:
                 json_res = await response.json()
                 return  json_res.get("data","").get("user")
 
     async def mining_info(self, session):
         url = f"https://api.tabibot.com/api/mining/v1/info"
 
-        async with session.get(url=url) as response:
+        async with session.get(url=url, ssl=False) as response:
             return await response.json()
 
     async def check_in(self, session):
         url = f"https://api.tabibot.com/api/user/v1/check-in"
 
-        async with session.post(url=url, json = {}) as response:
+        async with session.post(url=url, json = {}, ssl=False) as response:
             return await response.json()
 
     async def level_up(self, session):
         url = f"https://api.tabibot.com/api/user/v1/level-up"
 
-        async with session.post(url=url, json = {}) as response:
+        async with session.post(url=url, json = {}, ssl=False) as response:
             return await response.json()
 
     async def claim(self, session):
         url = f"https://api.tabibot.com/api/mining/v1/claim"
 
-        async with session.post(url=url, json = {}) as response:
+        async with session.post(url=url, json = {}, ssl=False) as response:
             return await response.json()
 
     def log(self, msg):
