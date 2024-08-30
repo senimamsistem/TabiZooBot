@@ -27,7 +27,8 @@ from .headers import headers
 class Tapper:
     def __init__(self, tg_client: Client):
         self.session_name = tg_client.name
-        self.user_id = None
+        self.tg_client = tg_client
+        self.user_id = 0
         self.username = None
         self.first_name = None
         self.last_name = None
@@ -230,7 +231,7 @@ class Tapper:
     async def run(self,proxy):
         while True:
             session = CloudflareScraper(headers=headers)
-            data = self.get_tg_web_data(proxy=proxy)
+            data = await self.get_tg_web_data(proxy=proxy)
             session.headers["Rawdata"] = f"{data}"
             try:
                 user_info = await self.user_info(session)
